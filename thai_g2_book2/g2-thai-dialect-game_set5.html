@@ -609,6 +609,7 @@ select.cell-select.bad{ border-color: var(--color-wrong); background: var(--colo
       📖 อ่าน<b>ประโยค</b>ที่ให้มา<br>
       🟧 ดูคำใน<b>กล่องสีส้ม</b> (คำที่ขีดเส้นใต้)<br>
       👉 เลือกว่าเป็นภาษาถิ่น <b>เหนือ · อีสาน · ใต้</b><br>
+      💡 บางคำใช้<b>เหมือนกันทั้งเหนือและอีสาน</b> ตอบถิ่นไหนก็ถูก<br>
       ⭐ ข้อละ 1 คะแนน รวม <b>10 ข้อ = 10 คะแนน</b>
     </div>
     <button class="btn-big" id="btnStart">▶ เริ่มเล่น</button>
@@ -663,47 +664,141 @@ select.cell-select.bad{ border-color: var(--color-wrong); background: var(--colo
 <script>
 window.SENTENCE_BANK = [
 
-  /* ---------- ภาษาเหนือ (คำเมือง) ---------- */
-  { pre:'หมู่',            word:'ละอ่อน',    post:'กำลังเล่นน้ำอยู่หน้าบ้านเจ้า',   ans:'nuea', th:'เด็ก' },
-  { pre:'วันเสาร์นี้เฮาไป',  word:'แอ่ว',      post:'ดอยสุเทพกันเน้อ',              ans:'nuea', th:'เที่ยว' },
-  { pre:'ฝนตกแล้ว อย่าลืมเอา', word:'จ้อง',   post:'ไปนำเน้อ',                    ans:'nuea', th:'ร่ม' },
-  { pre:'ปู่กับย่า',          word:'อู้',        post:'กำเมืองม่วนขนาด',             ans:'nuea', th:'พูด' },
-  { pre:'เลิกเรียนแล้วก็รีบ',  word:'ปิ๊ก',      post:'บ้านเลยนะเจ้า',               ans:'nuea', th:'กลับ' },
-  { pre:'ไป',              word:'ผ่อ',       post:'ขบวนแห่โคมลอยกั๋นเต๊อะ',        ans:'nuea', th:'ดู' },
-  { pre:'แม่ไป',           word:'กาด',       post:'ซื้อผักมาตั้งแต่เช้า',            ans:'nuea', th:'ตลาด' },
-  { pre:'แกงฮังเลหม้อนี้',    word:'ลำ',       post:'ขนาดเลยเจ้า',                 ans:'nuea', th:'อร่อย' },
-  { pre:'',                word:'ข้าเจ้า',    post:'จะไปโฮงเรียนก่อนนะเจ้า',        ans:'nuea', th:'ฉัน' },
-  { pre:'หนูอย่า',          word:'ขี้จุ๊',      post:'แม่เน้อ บาปนะเจ้า',            ans:'nuea', th:'โกหก' },
-  { pre:'ย้ายมาอยู่เมืองไกล ก็',word:'กึ๊ดเติง', post:'บ้านเก่าอยู่ตลอด',             ans:'nuea', th:'คิดถึง' },
-  { pre:'น้องใส่',          word:'เตี่ยว',     post:'ขาสั้นไปเล่นน้ำ',              ans:'nuea', th:'กางเกง' },
+  /* ================= 1. เด็ก ================= */
+  { pre:'หมู่',              word:'ละอ่อน',   post:'พากั๋นเล่นน้ำอยู่หน้าบ้านเจ้า',  ans:'nuea', th:'เด็ก' },
+  { pre:'แม่ปลุกน้อง',        word:'หล่า',     post:'ให้ตื่นไปโรงเรียนเด้อ',        ans:'isan', th:'เด็ก' },
+  { pre:'',                 word:'หนุ่ย',     post:'คนนั้นวิ่งเล่นอยู่หน้าบ้านนิ',    ans:'tai',  th:'เด็ก' },
 
-  /* ---------- ภาษาอีสาน ---------- */
-  { pre:'อ้ายชวนน้องไป',     word:'เบิ่ง',      post:'หมอลำตอนค่ำเด้อ',             ans:'isan', th:'ดู' },
-  { pre:'ครูกำลัง',          word:'เว้า',       post:'ภาษาอีสานให้นักเรียนฟัง',       ans:'isan', th:'พูด' },
-  { pre:'มาอยู่ไกลบ้าน',      word:'คิดฮอด',    post:'พ่อแม่หลายเด้อ',              ans:'isan', th:'คิดถึง' },
-  { pre:'ส้มตำจานนี้',        word:'แซบ',      post:'อีหลีเด้',                    ans:'isan', th:'อร่อย' },
-  { pre:'',                word:'ข้อย',       post:'สิไปโรงเรียนนำหมู่เด้อ',         ans:'isan', th:'ฉัน' },
-  { pre:'มื้อนี้ไปเตะบอลกับ',   word:'เสี่ยว',     post:'อยู่เด้อ',                    ans:'isan', th:'เพื่อน' },
-  { pre:'แม่เฮ็ด',          word:'ข้าวปุ้น',    post:'น้ำยาให้ลูกกิน',                ans:'isan', th:'ขนมจีน' },
-  { pre:'พ่อไป',            word:'ย่าง',       post:'เลาะทุ่งนาตอนเช้า',            ans:'isan', th:'เดิน' },
-  { pre:'เด็กน้อยอย่า',       word:'ขี้ตั๋ว',     post:'ครูเด้อ',                     ans:'isan', th:'โกหก' },
-  { pre:'เลิกเรียนแล้วรีบ',    word:'เมือ',      post:'บ้านเด้อลูก',                 ans:'isan', th:'กลับ' },
-  { pre:'ฝนสิตกแล้ว เอา',    word:'คันยู',     post:'ไปนำเด้อ',                    ans:'isan', th:'ร่ม' },
-  { pre:'แม่ซื้อ',           word:'บักหุ่ง',     post:'มาตำส้มตำให้กิน',             ans:'isan', th:'มะละกอ' },
+  /* ================= 2. เที่ยว ================= */
+  { pre:'วันเสาร์นี้เฮาไป',    word:'แอ่ว',     post:'ดอยสุเทพกันเน้อ',             ans:'nuea', th:'เที่ยว' },
+  { pre:'มื้ออาทิตย์นี้สิไป',   word:'เที้ยว',     post:'ตลาดนัดนำกันเด้อ',            ans:'isan', th:'เที่ยว' },
+  { pre:'วันหยุดนี้ไป',       word:'เถียว',     post:'ทะเลกันไหม',                 ans:'tai',  th:'เที่ยว' },
 
-  /* ---------- ภาษาใต้ ---------- */
-  { pre:'แม่และพ่อ',        word:'หรัก',      post:'และเป็นห่วงลูกทุกคน',           ans:'tai',  th:'รัก' },
-  { pre:'พ่อกับแม่',         word:'แหลง',     post:'ใต้กับลูกทุกวัน',                ans:'tai',  th:'พูด' },
-  { pre:'แกงส้มหม้อนี้',      word:'หรอย',     post:'จังหู',                       ans:'tai',  th:'อร่อย' },
-  { pre:'แม่ไป',            word:'หลาด',     post:'ซื้อปลามาทำกับข้าว',            ans:'tai',  th:'ตลาด' },
-  { pre:'เย็นนี้ไป',          word:'แล',       post:'หนังตะลุงกันไหม',              ans:'tai',  th:'ดู' },
-  { pre:'เลิกเรียนแล้วรีบ',    word:'หลบ',      post:'บ้านนะลูก',                   ans:'tai',  th:'กลับ' },
-  { pre:'อยู่ไกลบ้าน',        word:'หวังเหวิด',  post:'พ่อแม่ทุกวัน',                 ans:'tai',  th:'คิดถึง' },
-  { pre:'',                word:'ฉาน',      post:'จะไปโรงเรียนแล้วนะ',            ans:'tai',  th:'ฉัน' },
-  { pre:'วันหยุดนี้ไป',       word:'เถียว',     post:'ทะเลกันไหม',                  ans:'tai',  th:'เที่ยว' },
-  { pre:'เล่นว่าวกับเพื่อน ๆ',  word:'หนุก',      post:'จังหู',                       ans:'tai',  th:'สนุก' },
-  { pre:'แม่ซื้อ',           word:'ย่านัด',     post:'มาทำแกงคั่วให้กิน',            ans:'tai',  th:'สับปะรด' },
-  { pre:'ใส่',              word:'ดีปลี',      post:'ลงไปหน่อย แกงจะเผ็ดกำลังดี',    ans:'tai',  th:'พริก' }
+  /* ================= 3. ฉัน ================= */
+  { pre:'',                 word:'ข้าเจ้า',    post:'จะไปโฮงเรียนก่อนนะเจ้า',       ans:'nuea', th:'ฉัน' },
+  { pre:'',                 word:'ข้อย',      post:'สิไปโรงเรียนนำหมู่เด้อ',        ans:'isan', th:'ฉัน' },
+  { pre:'',                 word:'ฉาน',      post:'จะไปโรงเรียนแล้วนะ',           ans:'tai',  th:'ฉัน' },
+
+  /* ================= 4. มะละกอ ================= */
+  { pre:'แม่ซื้อ',            word:'บะก้วยเต๊ด', post:'มาทำส้มตำเจ้า',              ans:'nuea', th:'มะละกอ' },
+  { pre:'แม่ซื้อ',            word:'บักหุ่ง',    post:'มาตำส้มตำให้กิน',            ans:'isan', th:'มะละกอ' },
+  { pre:'หลังบ้านมีต้น',      word:'ลอกอ',     post:'ออกลูกเต็มต้นเลยนิ',          ans:'tai',  th:'มะละกอ' },
+
+  /* ================= 5. สนุก ================= */
+  { pre:'ไปงานวัดกับเพื่อน ๆ', word:'ม่วน',     post:'หลายเลย',                    ans:'nuea', also:['isan'], th:'สนุก' },
+  { pre:'เล่นว่าวกับเพื่อน ๆ',  word:'หนุก',     post:'จังหู',                      ans:'tai',  th:'สนุก' },
+
+  /* ================= 6. กางเกง ================= */
+  { pre:'น้องใส่',           word:'เตี่ยว',     post:'ขาสั้นไปเล่นน้ำเจ้า',          ans:'nuea', th:'กางเกง' },
+  { pre:'แม่ซัก',            word:'ส่ง',       post:'ให้ลูกใส่ไปโรงเรียนเด้อ',       ans:'isan', th:'กางเกง' },
+
+  /* ================= 7. บ้าน ================= */
+  { pre:'ตอนเย็นทุกคนกลับมาอยู่พร้อมหน้ากันที่', word:'เฮือน', post:'',           ans:'nuea', also:['isan'], th:'บ้าน' },
+
+  /* ================= 8. พูด ================= */
+  { pre:'ปู่กับย่า',           word:'อู้',       post:'กำเมืองม่วนขนาดเจ้า',         ans:'nuea', th:'พูด' },
+  { pre:'ครูกำลัง',          word:'เว้า',      post:'ภาษาอีสานให้นักเรียนฟัง',      ans:'isan', th:'พูด' },
+  { pre:'พ่อกับแม่',          word:'แหลง',     post:'ใต้กับลูกทุกวัน',              ans:'tai',  th:'พูด' },
+
+  /* ================= 9. รู้ ================= */
+  { pre:'เรื่องนี้เฮา',        word:'ฮู้',       post:'มาตั้งแต่เมื่อวานแล้ว',        ans:'nuea', also:['isan'], th:'รู้' },
+  { pre:'เรื่องนี้ฉาน',        word:'หรู้',      post:'มาตั้งแต่เมื่อวานแล้วนิ',       ans:'tai',  th:'รู้' },
+
+  /* ================= 10. ช้าง ================= */
+  { pre:'ปางช้างมี',         word:'จ๊าง',      post:'ตัวใหญ่หลายโตเจ้า',           ans:'nuea', th:'ช้าง' },
+  { pre:'',                 word:'ซ้าง',      post:'โตนั้นใหญ่คักแท้เด้อ',          ans:'isan', th:'ช้าง' },
+  { pre:'',                 word:'ฉ้าง',      post:'ตัวนั้นใหญ่จังหู',              ans:'tai',  th:'ช้าง' },
+
+  /* ================= 11. ตลาด ================= */
+  { pre:'แม่ไป',            word:'กาด',      post:'ซื้อผักมาตั้งแต่เช้าเจ้า',        ans:'nuea', th:'ตลาด' },
+  { pre:'แม่ไป',            word:'หลาด',     post:'ซื้อปลามาทำกับข้าว',           ans:'tai',  th:'ตลาด' },
+
+  /* ================= 12. ดู ================= */
+  { pre:'ไป',               word:'ผ่อ',      post:'ขบวนแห่โคมลอยกั๋นเต๊อะ',       ans:'nuea', th:'ดู' },
+  { pre:'อ้ายชวนน้องไป',     word:'เบิ่ง',     post:'หมอลำตอนค่ำเด้อ',             ans:'isan', th:'ดู' },
+  { pre:'เย็นนี้ไป',          word:'แล',       post:'หนังตะลุงกันไหม',             ans:'tai',  th:'ดู' },
+
+  /* ================= 13. ขนมจีน ================= */
+  { pre:'แม่ทำ',            word:'ขนมเส้น',  post:'น้ำเงี้ยวให้กินเจ้า',            ans:'nuea', th:'ขนมจีน' },
+  { pre:'แม่เฮ็ด',           word:'ข้าวปุ้น',   post:'น้ำยาให้ลูกกิน',              ans:'isan', th:'ขนมจีน' },
+  { pre:'เช้านี้กิน',          word:'หนมจีน',   post:'น้ำยาปักษ์ใต้',               ans:'tai',  th:'ขนมจีน' },
+
+  /* ================= 14. อร่อยจริง ๆ ================= */
+  { pre:'แกงฮังเลหม้อนี้',    word:'ลำแต๊ ๆ',   post:'เลยเจ้า',                   ans:'nuea', th:'อร่อยจริง ๆ' },
+  { pre:'ส้มตำจานนี้',       word:'แซบอีหลี',  post:'เด้',                        ans:'isan', th:'อร่อยจริง ๆ' },
+  { pre:'แกงส้มหม้อนี้',      word:'หรอยจังฮู้', post:'',                          ans:'tai',  th:'อร่อยจริง ๆ' },
+
+  /* ================= 15. พูดปด (โกหก) ================= */
+  { pre:'หนูอย่า',           word:'ขี้จุ๊',     post:'แม่เน้อ บาปนะเจ้า',           ans:'nuea', th:'พูดปด (โกหก)' },
+  { pre:'เด็กน้อยอย่า',       word:'ขี้ตั๋ว',    post:'ครูเด้อ',                    ans:'isan', th:'พูดปด (โกหก)' },
+  { pre:'อย่า',              word:'ขี้ฮก',    post:'เพื่อนนะ ไม่ดีนิ',             ans:'tai',  th:'พูดปด (โกหก)' },
+
+  /* ================= 16. รัก ================= */
+  { pre:'พ่อแม่',            word:'ฮัก',      post:'ลูกทุกคนคือกัน',              ans:'nuea', also:['isan'], th:'รัก' },
+  { pre:'แม่และพ่อ',         word:'หรัก',     post:'และเป็นห่วงลูกทุกคน',          ans:'tai',  th:'รัก' },
+
+  /* ================= 17. กลับ ================= */
+  { pre:'ค่ำแล้ว',           word:'ปิ๊ก',      post:'บ้านกันเต๊อะเจ้า',             ans:'nuea', th:'กลับ' },
+  { pre:'มืดแล้ว รีบ',        word:'เมือ',     post:'บ้านเด้อลูก',                 ans:'isan', th:'กลับ' },
+  { pre:'เลิกเรียนแล้วรีบ',    word:'หลบ',     post:'บ้านนะลูก',                   ans:'tai',  th:'กลับ' },
+
+  /* ================= 18. เพื่อน ================= */
+  { pre:'ไปโฮงเรียนกับ',     word:'เปื้อน',    post:'ตี้บ้านใกล้กั๋นเจ้า',            ans:'nuea', th:'เพื่อน' },
+  { pre:'มื้อนี้ไปเตะบอลกับ',  word:'เสี่ยว',    post:'อยู่เด้อ',                    ans:'isan', th:'เพื่อน' },
+  { pre:'ฉานไปโรงเรียนกับ',  word:'เผื่อน',    post:'ทุกวันนิ',                   ans:'tai',  th:'เพื่อน' },
+
+  /* ================= 19. คิดถึง ================= */
+  { pre:'ย้ายมาอยู่เมืองไกล ก็', word:'กึ๊ดเติง', post:'บ้านเก่าอยู่ตลอดเจ้า',        ans:'nuea', th:'คิดถึง' },
+  { pre:'มาอยู่ไกลบ้าน',      word:'คิดฮอด',   post:'พ่อแม่หลายเด้อ',              ans:'isan', th:'คิดถึง' },
+  { pre:'อยู่ไกลบ้าน',        word:'หวังเหวิด',  post:'พ่อแม่ทุกวัน',                ans:'tai',  th:'คิดถึง' },
+
+  /* ================= 20. ร่ม ================= */
+  { pre:'ฝนตกแล้ว อย่าลืมเอา', word:'จ้อง',    post:'ไปนำเน้อ',                   ans:'nuea', th:'ร่ม' },
+  { pre:'ฝนสิตกแล้ว เอา',     word:'คันยู',    post:'ไปนำเด้อ',                   ans:'isan', th:'ร่ม' },
+
+  /* ================= 21. ฝรั่ง ================= */
+  { pre:'หลังบ้านมีต้น',      word:'บ่าหมั้น',   post:'ออกลูกดกขนาดเจ้า',          ans:'nuea', th:'ฝรั่ง' },
+  { pre:'แม่ซื้อ',            word:'บักสีดา',   post:'มาให้กินเป็นของว่างเด้อ',      ans:'isan', th:'ฝรั่ง' },
+  { pre:'',                 word:'ย่าหมู',    post:'ลูกนี้กรอบหวานจังหู',          ans:'tai',  th:'ฝรั่ง' },
+
+  /* ================= 22. สับปะรด ================= */
+  { pre:'ป้าปอก',           word:'บ่าขะนัด',  post:'ใส่จานมาให้กินเจ้า',           ans:'nuea', th:'สับปะรด' },
+  { pre:'สวนหลังบ้านปลูก',   word:'บักนัด',    post:'เต็มไปหมดเลยเด้อ',           ans:'isan', th:'สับปะรด' },
+  { pre:'แม่ซื้อ',            word:'ย่านัด',    post:'มาทำแกงคั่วให้กิน',           ans:'tai',  th:'สับปะรด' },
+
+  /* ================= 23. กะละมัง ================= */
+  { pre:'แม่เอา',            word:'เป',       post:'ใส่น้ำไว้ซักผ้าเจ้า',           ans:'nuea', th:'กะละมัง' },
+  { pre:'แม่เอา',            word:'กะมัง',    post:'ไปล้างผักอยู่หลังบ้าน',         ans:'isan', th:'กะละมัง' },
+  { pre:'ยายใส่ปลาลงใน',    word:'โคม',      post:'ใบใหญ่',                     ans:'tai',  th:'กะละมัง' },
+
+  /* ================= 24. แตงโม ================= */
+  { pre:'แม่ซื้อ',            word:'บ่าเต้า',    post:'มาแบ่งกั๋นกินเจ้า',             ans:'nuea', th:'แตงโม' },
+  { pre:'มื้อนี้อากาศฮ้อน กิน',  word:'บักโม',     post:'แล้วซำบายหลาย',              ans:'isan', th:'แตงโม' },
+  { pre:'',                 word:'แตงจีน',   post:'ลูกนี้หวานฉ่ำจังหู',            ans:'tai',  th:'แตงโม' },
+
+  /* ================= 25. มะม่วง ================= */
+  { pre:'หน้าบ้านมีต้น',      word:'บ่าม่วง',    post:'ออกลูกดกขนาดเจ้า',           ans:'nuea', th:'มะม่วง' },
+  { pre:'เด็ดเอา',           word:'บักม่วง',   post:'มาจิ้มแจ่วกินเด้อ',             ans:'isan', th:'มะม่วง' },
+  { pre:'',                 word:'ม่วง',      post:'ลูกนี้สุกแล้ว หรอยจังหู',        ans:'tai',  th:'มะม่วง' },
+
+  /* ================= 26. ขนุน ================= */
+  { pre:'ยายเอา',           word:'บ่าหนุน',   post:'สุกมาฝากหลานเจ้า',            ans:'nuea', th:'ขนุน' },
+  { pre:'หลังบ้านมีต้น',      word:'บักมี่',     post:'ออกลูกใหญ่หลาย',             ans:'isan', th:'ขนุน' },
+
+  /* ================= 27. ฟักทอง ================= */
+  { pre:'แม่แกงบวด',        word:'บ่าฟักแก้ว', post:'ใส่กะทิหอมขนาดเจ้า',          ans:'nuea', th:'ฟักทอง' },
+  { pre:'แม่เก็บ',            word:'บักอึ',     post:'จากสวนมาแกงใส่หน่อไม้เด้อ',    ans:'isan', th:'ฟักทอง' },
+  { pre:'ยายเอา',           word:'น้ำเต้า',    post:'มาแกงเลียงให้กินนิ',           ans:'tai',  th:'ฟักทอง' },
+
+  /* ================= 28. พริก ================= */
+  { pre:'ตำน้ำพริกใส่',       word:'บ่าเผ็ด',    post:'หน่อยเดียวก็เผ็ดแล้วเจ้า',      ans:'nuea', th:'พริก' },
+  { pre:'ตำส้มตำใส่',        word:'บักพริก',   post:'หลายเม็ดแซบหลาย',            ans:'isan', th:'พริก' },
+  { pre:'แกงใต้ใส่',         word:'ดีปลี',     post:'เยอะ เผ็ดจังหู',              ans:'tai',  th:'พริก' },
+
+  /* ================= 29. มะนาว ================= */
+  { pre:'บีบ',              word:'บ่าน้าว',    post:'ใส่ตำส้มหน่อยเจ้า',            ans:'nuea', th:'มะนาว' },
+  { pre:'แม่ใช้ให้ไปเก็บ',     word:'บักนาว',    post:'หลังบ้านมาตำส้มตำเด้อ',        ans:'isan', th:'มะนาว' },
+  { pre:'บีบ',              word:'ส้มนาว',    post:'ใส่น้ำชุบให้เปรี้ยวนิ',          ans:'tai',  th:'มะนาว' }
 
 ];
 </script>
@@ -850,33 +945,45 @@ function pickRandom(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 const POINTS_PER_Q = 1;
 
 function prepareRound(){
-  const byDialect = { nuea:[], isan:[], tai:[] };
-  SENTENCE_BANK.forEach(item => {
-    if (byDialect[item.ans]) byDialect[item.ans].push(item);
-  });
-
-  // หยิบถิ่นละอย่างน้อย 3 ข้อก่อน แล้วค่อยเติมให้ครบ 10 ข้อ
+  const shuffled = shuffleArray(SENTENCE_BANK);
+  const usedTh = new Set();      // กันไม่ให้ความหมายเดียวกันออกซ้ำในรอบเดียว
   const picked = [];
-  DIALECTS.forEach(d => {
-    picked.push(...shuffleArray(byDialect[d]).slice(0, 3));
-  });
-  const rest = shuffleArray(SENTENCE_BANK.filter(it => !picked.includes(it)));
-  while (picked.length < CONFIG.questionsPerRound && rest.length){
-    picked.push(rest.shift());
+
+  function tryAdd(item){
+    if (picked.length >= CONFIG.questionsPerRound) return false;
+    if (usedTh.has(item.th)) return false;
+    usedTh.add(item.th);
+    picked.push(item);
+    return true;
   }
 
-  gameQuestions = shuffleArray(picked)
-    .slice(0, CONFIG.questionsPerRound)
-    .map(item => ({
-      item,
-      choices: shuffleArray(DIALECTS)
-    }));
+  // รอบแรก: ให้ออกครบทุกถิ่น อย่างน้อยถิ่นละ 3 ข้อ
+  DIALECTS.forEach(d => {
+    let n = 0;
+    for (const item of shuffled){
+      if (n >= 3) break;
+      if (item.ans === d && tryAdd(item)) n++;
+    }
+  });
+  // รอบสอง: เติมให้ครบ 10 ข้อ
+  for (const item of shuffled) tryAdd(item);
+
+  gameQuestions = shuffleArray(picked).map(item => ({
+    item,
+    choices: shuffleArray(DIALECTS),
+    okSet: [item.ans].concat(item.also || [])
+  }));
 
   currentIndex = 0;
   score = 0;
   wrongAnswers = [];
   answered = false;
   selectedChoice = null;
+}
+
+// คำที่ใช้เหมือนกันหลายถิ่น เช่น "ฮัก" ใช้ทั้งเหนือและอีสาน — ตอบถิ่นไหนก็ถูก
+function okLabel(okSet, joiner){
+  return okSet.map(d => DIALECT_LABEL[d]).join(joiner || 'หรือ');
 }
 
 /* ============================================================
@@ -984,14 +1091,15 @@ function checkAnswer(){
 
   const q = gameQuestions[currentIndex];
   const it = q.item;
-  const isCorrect = (selectedChoice === it.ans);
+  const okSet = q.okSet;
+  const isCorrect = okSet.includes(selectedChoice);
 
   [...choiceRowEl.children].forEach(c => {
     const d = c.dataset.dialect;
     c.disabled = true;
     c.classList.remove('selected');
     const mark = c.querySelector('.cmark');
-    if (d === it.ans){
+    if (okSet.includes(d)){
       c.classList.add('correct');
       mark.textContent = '✓';
     } else if (d === selectedChoice){
@@ -1000,9 +1108,11 @@ function checkAnswer(){
     }
   });
 
-  meaningRevealEl.innerHTML =
-    `“${escapeHtml(it.word)}” เป็นภาษาถิ่น<b>${DIALECT_LABEL[it.ans]}</b> ` +
-    `แปลว่า <b>${escapeHtml(it.th)}</b>`;
+  meaningRevealEl.innerHTML = (okSet.length > 1)
+    ? `“${escapeHtml(it.word)}” ใช้ได้ทั้งภาษาถิ่น<b>${okLabel(okSet, 'และ')}</b> ` +
+      `แปลว่า <b>${escapeHtml(it.th)}</b>`
+    : `“${escapeHtml(it.word)}” เป็นภาษาถิ่น<b>${DIALECT_LABEL[it.ans]}</b> ` +
+      `แปลว่า <b>${escapeHtml(it.th)}</b>`;
 
   if (isCorrect){
     score += POINTS_PER_Q;
@@ -1020,7 +1130,7 @@ function checkAnswer(){
       word: it.word,
       th: it.th,
       picked: DIALECT_LABEL[selectedChoice],
-      correct: DIALECT_LABEL[it.ans]
+      correct: okLabel(okSet)
     });
   }
 
