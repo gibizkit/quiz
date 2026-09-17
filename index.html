@@ -250,7 +250,7 @@ function render(filter){
       + '<span class="count">' + games.length + ' เกม</span></summary>'
       + '<div class="items">'
       + games.map(function(g, i){
-          return '<a href="' + sec.folder + '/' + g.file + '">'
+          return '<a href="' + sec.folder + '/' + g.file + '" target="_blank" rel="noopener">'
             + '<span class="num">' + (i + 1) + '</span>'
             + '<span class="t"><b>' + g.title + '</b><small>' + g.file + '</small></span>'
             + '<span class="go">›</span></a>';
