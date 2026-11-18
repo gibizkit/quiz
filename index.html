@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คลังเกมทบทวนบทเรียน ป.2</title>
+<title>คลังเกมทบทวนบทเรียน</title>
 <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -176,6 +176,70 @@ footer{
   text-align:center; margin-top: 18px;
   color: #8a7f6f; font-size: 13px;
 }
+
+/* ---------- เลือกชั้น / เทอม ---------- */
+.pick-label{
+  font-size: 14px; font-weight:700; color: var(--color-muted);
+  margin: 0 0 6px 4px;
+}
+.grades{
+  display:grid; grid-template-columns: repeat(6, 1fr); gap:8px;
+  margin-bottom: 14px;
+}
+.grades button, .terms button{
+  font-family: var(--font-main);
+  font-weight:700; cursor:pointer;
+  border: 3px solid var(--color-border);
+  background:#fff; color: var(--color-text);
+  transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.grades button{
+  font-size: 17px; min-height: 48px; border-radius: 16px; padding: 4px 0;
+}
+.grades button:disabled{ opacity:.4; cursor:default; }
+.grades button[aria-pressed="true"], .terms button[aria-pressed="true"]{
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-color: var(--color-primary-dark);
+  color:#fff;
+  box-shadow: 0 3px 0 #3d8a7a;
+}
+.grades button:not(:disabled):active, .terms button:active{ transform: translateY(1px) scale(0.98); }
+
+.terms{
+  display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+  margin-bottom: 18px;
+}
+.terms button{
+  font-size: 18px; min-height: 56px; border-radius: 18px; padding: 6px 10px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1.3;
+}
+.terms button small{ font-size: 12px; font-weight:600; opacity:.8; }
+
+/* ---------- วิชาที่ยังไม่มีเกม ---------- */
+.subject-empty{
+  display:flex; align-items:center; gap:10px;
+  padding: 12px 18px; margin-bottom: 14px;
+  border: 3px dashed var(--color-border); border-radius: 20px;
+  font-size: 18px; font-weight:700; color:#c2b6a5;
+}
+.subject-empty .soon{ margin-inline-start:auto; font-size: 13px; font-weight:600; }
+
+/* ---------- หัวข้อย่อย เล่ม/หน่วย ---------- */
+.unit{
+  font-size: 15px; font-weight:700; color: var(--color-muted);
+  margin: 6px 4px -2px;
+}
+.crumb{
+  display:inline-block; font-size: 12px; font-weight:600;
+  color: var(--color-primary-dark); background: var(--color-mint);
+  padding: 1px 10px; border-radius: 999px; margin-bottom: 2px;
+}
+@media (max-width: 420px){
+  .grades{ gap:6px; }
+  .grades button{ font-size: 15px; min-height: 44px; border-radius: 14px; }
+  .terms button{ font-size: 16px; }
+  .subject-empty{ font-size: 16px; padding: 10px 14px; }
+}
 </style>
 </head>
 <body>
@@ -186,91 +250,197 @@ footer{
         <img class="mascot-img" src="data:image/png;base64,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" alt="น้องแมวดีใจ">
       </div>
       <h1>คลังเกมทบทวนบทเรียน</h1>
-      <p class="subtitle">เลือกวิชา แล้วแตะเกมที่อยากเล่นได้เลย 🎮</p>
+      <p class="subtitle">เลือกชั้น เลือกเทอม แล้วแตะเกมที่อยากเล่นได้เลย 🎮</p>
     </div>
 
-    <input id="q" class="search" type="search" placeholder="ค้นหาชื่อเกม หรือ วิชา…" autocomplete="off">
+    <p class="pick-label">ชั้น</p>
+    <div class="grades" id="grades" role="group" aria-label="เลือกชั้น"></div>
+
+    <p class="pick-label">ภาคเรียน</p>
+    <div class="terms" id="terms" role="group" aria-label="เลือกภาคเรียน"></div>
+
+    <input id="q" class="search" type="search" placeholder="ค้นหาเกมทุกชั้น ทุกวิชา…" autocomplete="off">
 
     <div id="list"></div>
     <p class="empty" id="empty">🙀 ไม่พบเกมที่ค้นหา</p>
 
-    <footer>อัปเดตล่าสุด 2 พ.ย. 2569</footer>
+    <footer>อัปเดตล่าสุด 18 พ.ย. 2569</footer>
   </div>
 </div>
 
 <script>
 /* ============================================================
-   รายชื่อเกม — เพิ่มเกมใหม่ได้ที่นี่
-   title = ข้อความใน <title> ของไฟล์เกมนั้น
+   โครงสร้างโฟลเดอร์:  p{ชั้น}/term{1|2}/{วิชา}/{เล่มหรือหน่วย}/ไฟล์เกม.html
+     เช่น p2/term1/thai/book2/g2-thai-dialect-game_set1.html
+
+   เพิ่มเกมใหม่: ใส่ไฟล์ในโฟลเดอร์ตามโครงสร้างข้างบน
+   แล้วเพิ่มรายการใน DATA ด้านล่าง (ถ้าเล่ม/หน่วยมีอยู่แล้ว เพิ่มใน games ได้เลย)
+     grade   = ชั้น 1–6
+     term    = 1 เทอมต้น / 2 เทอมปลาย
+     subject = math | thai | science | social | english
+     unit    = ชื่อเล่ม/หน่วย ที่แสดงบนหน้า
+     path    = โฟลเดอร์ของเล่ม/หน่วยนั้น
    ============================================================ */
+const SUBJECTS = [
+  { id:"math",    name:"คณิตศาสตร์",   icon:"🔢" },
+  { id:"thai",    name:"ภาษาไทย",      icon:"📖" },
+  { id:"science", name:"วิทยาศาสตร์",   icon:"🔬" },
+  { id:"social",  name:"สังคมศึกษา",    icon:"🌏" },
+  { id:"english", name:"ภาษาอังกฤษ",   icon:"🔤" }
+];
+const TERMS = { 1:"เทอมต้น", 2:"เทอมปลาย" };
+
 const DATA = [
-  { folder:"social_g2_book3", name:"สังคมศึกษา ป.2 เล่ม 3", icon:"🌏", games:[
-    { file:"g2-social-book3-set1.html", title:"เกมทายคำถาม สังคมศึกษา ป.2" },
-    { file:"g2-social-book3-set2.html", title:"เกมทายคำถาม วันสำคัญ ป.2" },
-    { file:"g2-social-book3-set3.html", title:"เกมทายคำถาม วันสำคัญ ชุด ๒ ป.2" }
-  ]},
-  { folder:"social_g2_book4", name:"สังคมศึกษา ป.2 เล่ม 4", icon:"🌏", games:[
-    { file:"g2-social-book4-set1.html", title:"เกมทายคำถาม สิ่งแวดล้อม ทรัพยากร และสิ่งแวดล้อมในโรงเรียน" },
-    { file:"g2-social-book4-set2.html", title:"เกมทายคำถาม ตำแหน่ง โลก ดวงจันทร์ ดวงอาทิตย์ ฤดูกาล" }
-  ]},
-  { folder:"thai_g2_book2", name:"หลักภาษาไทย ป.2 เล่ม 2 ภาษาถิ่น", icon:"📖", games:[
+  { grade:2, term:1, subject:"thai", unit:"หลักภาษาไทย เล่ม 2 · ภาษาถิ่น", path:"p2/term1/thai/book2", games:[
     { file:"g2-thai-dialect-game_set1.html", title:"เกมคำภาษาถิ่น เหนือ–อีสาน–ใต้" },
     { file:"g2-thai-dialect-game_set2.html", title:"เกมคำภาษาถิ่น ชุดที่ 2 — ทายคำจากภาษาถิ่น" },
     { file:"g2-thai-dialect-game_set3.html", title:"เกมคำภาษาถิ่น ชุดที่ 3 — คำไหนความหมายต่าง" },
     { file:"g2-thai-dialect-game_set4.html", title:"เกมคำภาษาถิ่น ชุดที่ 4 — เติมคำลงตาราง" },
     { file:"g2-thai-dialect-game_set5.html", title:"เกมคำภาษาถิ่น ชุดที่ 5 — ทายถิ่นจากประโยค" }
   ]},
-  { folder:"Eng", name:"ภาษาอังกฤษ ป.2", icon:"🔤", games:[
+  { grade:2, term:1, subject:"social", unit:"เล่ม 3", path:"p2/term1/social/book3", games:[
+    { file:"g2-social-book3-set1.html", title:"เกมทายคำถาม สังคมศึกษา ป.2" },
+    { file:"g2-social-book3-set2.html", title:"เกมทายคำถาม วันสำคัญ ป.2" },
+    { file:"g2-social-book3-set3.html", title:"เกมทายคำถาม วันสำคัญ ชุด ๒ ป.2" }
+  ]},
+  { grade:2, term:1, subject:"social", unit:"เล่ม 4", path:"p2/term1/social/book4", games:[
+    { file:"g2-social-book4-set1.html", title:"เกมทายคำถาม สิ่งแวดล้อม ทรัพยากร และสิ่งแวดล้อมในโรงเรียน" },
+    { file:"g2-social-book4-set2.html", title:"เกมทายคำถาม ตำแหน่ง โลก ดวงจันทร์ ดวงอาทิตย์ ฤดูกาล" }
+  ]},
+  { grade:2, term:2, subject:"science", unit:"หน่วยที่ 1 · วัตถุ วัสดุ", path:"p2/term2/science/unit1", games:[
+    { file:"g2-science-unit1-set1.html", title:"เกมทายคำถาม วิทยาศาสตร์ ป.2 หน่วยที่ 1 ชุดที่ 1 (ของเล่น การดูดซับน้ำ)" },
+    { file:"g2-science-unit1-set2.html", title:"เกมทายคำถาม วิทยาศาสตร์ ป.2 หน่วยที่ 1 ชุดที่ 2 (ผสมวัสดุ นำกลับมาใช้ใหม่)" }
+  ]},
+  { grade:2, term:2, subject:"science", unit:"หน่วยที่ 2 · แสง", path:"p2/term2/science/unit2", games:[
+    { file:"g2-science-unit2-set1.html", title:"เกมทายคำถาม วิทยาศาสตร์ ป.2 หน่วยที่ 2 แสง" }
+  ]},
+  { grade:2, term:2, subject:"science", unit:"หน่วยที่ 3 · ดิน", path:"p2/term2/science/unit3", games:[
+    { file:"g2-science-unit3-set1.html", title:"เกมทายคำถาม วิทยาศาสตร์ ป.2 หน่วยที่ 3 ดิน" }
+  ]},
+  { grade:2, term:2, subject:"english", unit:"Unit 4 · Things to Wear", path:"p2/term2/english/unit4", games:[
     { file:"EU2.4_things-to-wear-game.html", title:"Things to Wear — เกมคำศัพท์เครื่องแต่งกาย (Unit 4)" }
   ]}
 ];
 
-/* โฟลเดอร์ที่ให้ "กาง" (เปิดอยู่) ตั้งแต่เข้าหน้าแรก — รอบนี้คือหลักภาษาไทย
-   เปลี่ยนรอบหน้าแค่แก้ค่าในบรรทัดนี้ (ใส่ "" ถ้าอยากให้หุบทั้งหมด) */
-const OPEN_FOLDER = "Eng";
+/* ---------- สถานะ: ชั้น/เทอมที่เลือก (จำไว้ในเครื่อง) ---------- */
+const store = {
+  get(){ try{ return JSON.parse(localStorage.getItem('quiz-pick') || 'null'); }catch(e){ return null; } },
+  set(v){ try{ localStorage.setItem('quiz-pick', JSON.stringify(v)); }catch(e){} }
+};
+const hasGames = (g, t) => DATA.some(u => u.grade === g && (t == null || u.term === t));
+const countGames = (g, t) => DATA.filter(u => u.grade === g && u.term === t)
+  .reduce((n, u) => n + u.games.length, 0);
 
-const listEl  = document.getElementById('list');
-const emptyEl = document.getElementById('empty');
+// เทอมตามปฏิทิน: พ.ค.–ต.ค. = เทอมต้น, พ.ย.–เม.ย. = เทอมปลาย
+const m = new Date().getMonth() + 1;
+const calTerm = (m >= 5 && m <= 10) ? 1 : 2;
+
+let pick = store.get();
+if(!pick || !hasGames(pick.grade)){
+  const g = [1,2,3,4,5,6].find(x => hasGames(x)) || 1;
+  pick = { grade:g, term: hasGames(g, calTerm) ? calTerm : (calTerm === 1 ? 2 : 1) };
+}
+
+const gradesEl = document.getElementById('grades');
+const termsEl  = document.getElementById('terms');
+const listEl   = document.getElementById('list');
+const emptyEl  = document.getElementById('empty');
+const qEl      = document.getElementById('q');
 const chev = '<svg class="chev" width="11" height="16" viewBox="0 0 11 16" fill="none">'
   + '<path d="M2.5 2.5L8 8l-5.5 5.5" stroke="currentColor" stroke-width="2.6"'
   + ' stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function render(filter){
-  const f = (filter || "").trim().toLowerCase();
-  listEl.innerHTML = "";
-  let shown = 0;
-
-  DATA.forEach(function(sec){
-    const games = sec.games.filter(function(g){
-      return !f || g.title.toLowerCase().includes(f)
-        || sec.name.toLowerCase().includes(f)
-        || g.file.toLowerCase().includes(f);
-    });
-    if(!games.length) return;
-    shown += games.length;
-
-    const d = document.createElement('details');
-    // ตอนค้นหาคลี่ทุกกล่อง / ปกติคลี่เฉพาะโฟลเดอร์ที่กำหนดไว้ใน OPEN_FOLDER
-    d.open = !!f || sec.folder === OPEN_FOLDER;
-    d.innerHTML =
-      '<summary>' + chev + '<span>' + sec.icon + ' ' + sec.name + '</span>'
-      + '<span class="count">' + games.length + ' เกม</span></summary>'
-      + '<div class="items">'
-      + games.map(function(g, i){
-          return '<a href="' + sec.folder + '/' + g.file + '" target="_blank" rel="noopener">'
-            + '<span class="num">' + (i + 1) + '</span>'
-            + '<span class="t"><b>' + g.title + '</b><small>' + g.file + '</small></span>'
-            + '<span class="go">›</span></a>';
-        }).join('')
-      + '</div>';
-    listEl.appendChild(d);
-  });
-
-  emptyEl.style.display = shown ? 'none' : 'block';
+function renderPickers(){
+  gradesEl.innerHTML = [1,2,3,4,5,6].map(g =>
+    '<button type="button" data-g="' + g + '" aria-pressed="' + (g === pick.grade) + '"'
+    + (hasGames(g) ? '' : ' disabled title="ยังไม่มีเกม"') + '>ป.' + g + '</button>'
+  ).join('');
+  termsEl.innerHTML = [1,2].map(t => {
+    const n = countGames(pick.grade, t);
+    return '<button type="button" data-t="' + t + '" aria-pressed="' + (t === pick.term) + '">'
+      + TERMS[t] + '<small>' + (n ? n + ' เกม' : 'ยังไม่มีเกม') + '</small></button>';
+  }).join('');
 }
 
+function gameLink(u, g, i, crumb){
+  return '<a href="' + esc(u.path + '/' + g.file) + '" target="_blank" rel="noopener">'
+    + '<span class="num">' + (i + 1) + '</span>'
+    + '<span class="t">' + (crumb ? '<span class="crumb">' + esc(crumb) + '</span>' : '')
+    + '<b>' + esc(g.title) + '</b><small>' + esc(g.file) + '</small></span>'
+    + '<span class="go">›</span></a>';
+}
+
+function subjectBox(s, units, open, withCrumb){
+  const total = units.reduce((n, u) => n + u.games.length, 0);
+  const d = document.createElement('details');
+  d.open = open;
+  let i = 0;
+  d.innerHTML = '<summary>' + chev + '<span>' + s.icon + ' ' + s.name + '</span>'
+    + '<span class="count">' + total + ' เกม</span></summary>'
+    + '<div class="items">'
+    + units.map(u =>
+        (withCrumb ? '' : '<div class="unit">' + esc(u.unit) + '</div>')
+        + u.games.map(g => gameLink(u, g, i++,
+            withCrumb ? 'ป.' + u.grade + ' · ' + TERMS[u.term] + ' · ' + u.unit : '')).join('')
+      ).join('')
+    + '</div>';
+  return d;
+}
+
+function render(){
+  const f = qEl.value.trim().toLowerCase();
+  listEl.innerHTML = '';
+  let shown = 0;
+
+  if(f){
+    // ค้นหา: ทุกชั้น ทุกเทอม จัดกลุ่มตามวิชา
+    gradesEl.style.opacity = termsEl.style.opacity = '.45';
+    SUBJECTS.forEach(s => {
+      const units = DATA.filter(u => u.subject === s.id).map(u => {
+        const hay = [s.name, u.unit, 'ป.' + u.grade, TERMS[u.term]].join(' ').toLowerCase();
+        const games = u.games.filter(g => hay.includes(f)
+          || g.title.toLowerCase().includes(f) || g.file.toLowerCase().includes(f));
+        return Object.assign({}, u, { games });
+      }).filter(u => u.games.length);
+      if(!units.length) return;
+      shown += units.reduce((n, u) => n + u.games.length, 0);
+      listEl.appendChild(subjectBox(s, units, true, true));
+    });
+    emptyEl.style.display = shown ? 'none' : 'block';
+    return;
+  }
+
+  gradesEl.style.opacity = termsEl.style.opacity = '';
+  emptyEl.style.display = 'none';
+  SUBJECTS.forEach(s => {
+    const units = DATA.filter(u => u.grade === pick.grade && u.term === pick.term && u.subject === s.id);
+    if(!units.length){
+      const e = document.createElement('div');
+      e.className = 'subject-empty';
+      e.innerHTML = '<span>' + s.icon + ' ' + s.name + '</span><span class="soon">ยังไม่มีเกม</span>';
+      listEl.appendChild(e);
+      return;
+    }
+    listEl.appendChild(subjectBox(s, units, true, false));
+  });
+}
+
+gradesEl.addEventListener('click', e => {
+  const b = e.target.closest('button[data-g]'); if(!b || b.disabled) return;
+  const g = +b.dataset.g;
+  pick = { grade:g, term: hasGames(g, pick.term) ? pick.term : (pick.term === 1 ? 2 : 1) };
+  store.set(pick); qEl.value = ''; renderPickers(); render();
+});
+termsEl.addEventListener('click', e => {
+  const b = e.target.closest('button[data-t]'); if(!b) return;
+  pick.term = +b.dataset.t;
+  store.set(pick); qEl.value = ''; renderPickers(); render();
+});
+qEl.addEventListener('input', render);
+
+renderPickers();
 render();
-document.getElementById('q').addEventListener('input', function(e){ render(e.target.value); });
 </script>
 </body>
 </html>
